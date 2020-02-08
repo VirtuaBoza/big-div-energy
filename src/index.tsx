@@ -1,13 +1,13 @@
-/**
- * @class ExampleComponent
- */
-
 import * as React from 'react';
 import styles from './styles.css';
 export {
-  BigDivEnergyProvider,
+  default as BigDivEnergyProvider,
   useBigDivEnergy
-} from './BigDivEnergyProvider/BigDivEnergyProvider';
+} from './BigDivEnergyProvider';
+export { default as Box } from './Box';
+export { default as Columns } from './Columns';
+export { default as Inline } from './Inline';
+export { default as Stack } from './Stack';
 
 interface ExampleComponentProps {
   text: string;
