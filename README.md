@@ -2,24 +2,59 @@
 
 >
 
-[![NPM](https://img.shields.io/npm/v/blah.svg)](https://www.npmjs.com/package/big-div-energy) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
 ## Install
 
 ```bash
-npm install --save big-div-energy
+npm install big-div-energy
+```
+
+Or
+
+```bash
+yarn add big-div-energy
 ```
 
 ## Usage
 
-```tsx
-import * as React from 'react';
+```js
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BigDivEnergyProvider } from 'big-div-energy';
+import App from './App';
 
-import MyComponent from 'big-div-energy';
+ReactDOM.render(
+  <BigDivEnergyProvider>
+    <App />
+  </BigDivEnergyProvider>,
+  document.getElementById('root')
+);
+```
 
-class Example extends React.Component {
+```js
+// App.js
+import { Box, Columns, Inline, Stack } from 'big-div-energy';
+import React, { Component } from 'react';
+
+export default class App extends Component {
   render() {
-    return <MyComponent />;
+    return (
+      <Box>
+        <Stack>
+          <Box>Hi there</Box>
+          <Inline>
+            <Box>Hi there</Box>
+            <Box>Hi there</Box>
+            <Box>Hi there</Box>
+          </Inline>
+          <Columns>
+            <Box>Hi there</Box>
+            <Box>Hi there</Box>
+            <Box>Hi there</Box>
+          </Columns>
+        </Stack>
+      </Box>
+    );
   }
 }
 ```
