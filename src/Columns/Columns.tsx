@@ -1,6 +1,5 @@
-import classNames from 'classnames';
+import { css, cx } from 'emotion';
 import * as React from 'react';
-import styles from './Columns.css';
 
 export interface ColumnsProps {
   className?: string;
@@ -13,7 +12,15 @@ const Columns: React.FC<ColumnsProps> = React.forwardRef<
   return (
     <div
       {...rest}
-      className={classNames(styles.container, className)}
+      className={cx(
+        css`
+          display: flex;
+          > * {
+            width: 100%;
+          }
+        `,
+        className
+      )}
       ref={ref}
     >
       {children}

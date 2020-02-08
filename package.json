@@ -24,7 +24,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
+    "emotion": "^10.0.27",
     "normalize.css": "^8.0.1"
   },
   "peerDependencies": {
@@ -39,7 +39,6 @@
     "@storybook/addons": "^5.3.12",
     "@storybook/react": "^5.3.12",
     "@svgr/rollup": "^2.4.1",
-    "@types/classnames": "^2.2.9",
     "@types/jest": "^23.1.5",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",

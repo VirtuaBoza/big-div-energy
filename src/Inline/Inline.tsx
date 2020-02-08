@@ -1,6 +1,5 @@
-import classNames from 'classnames';
+import { css, cx } from 'emotion';
 import * as React from 'react';
-import styles from './Inline.css';
 
 export interface InlineProps {
   className?: string;
@@ -13,7 +12,13 @@ const Inline: React.FC<InlineProps> = React.forwardRef<
   return (
     <div
       {...rest}
-      className={classNames(styles.container, className)}
+      className={cx(
+        css`
+          display: flex;
+          flex-wrap: wrap;
+        `,
+        className
+      )}
       ref={ref}
     >
       {React.Children.toArray(children).map((child, index) => (

@@ -1,6 +1,5 @@
-import classNames from 'classnames';
+import { css, cx } from 'emotion';
 import * as React from 'react';
-import styles from './Stack.css';
 
 export interface StackProps {
   className?: string;
@@ -13,7 +12,15 @@ const Stack: React.FC<StackProps> = React.forwardRef<
   return (
     <div
       {...rest}
-      className={classNames(styles.container, className)}
+      className={cx(
+        css`
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+        `,
+        className
+      )}
       ref={ref}
     >
       {React.Children.toArray(children).map((child, index) => (

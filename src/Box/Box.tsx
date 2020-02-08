@@ -1,6 +1,5 @@
-import classNames from 'classnames';
+import { css, cx } from 'emotion';
 import * as React from 'react';
-import styles from './Box.css';
 
 export interface BoxProps {
   type: string;
@@ -11,14 +10,21 @@ const Box: React.FC<BoxProps> = React.forwardRef<HTMLElement, BoxProps>(
   ({ type, className, ...rest }, ref) => {
     return React.createElement(type, {
       ...rest,
-      className: classNames(styles.container, className),
-      ref
+      className: cx(
+        css`
+          box-sizing: border-box;
+          margin: 0px;
+          word-break: break-word;
+        `,
+        className
+      ),
+      ref,
     });
   }
 );
 
 Box.defaultProps = {
-  type: 'div'
+  type: 'div',
 };
 
 export default Box;
