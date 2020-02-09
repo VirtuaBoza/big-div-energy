@@ -1,5 +1,7 @@
-import { css, cx } from 'emotion';
+import { cx } from 'emotion';
 import * as React from 'react';
+import baselineStyle from '../baseline.scss';
+import styles from './Columns.scss';
 
 export interface ColumnsProps {
   className?: string;
@@ -12,15 +14,7 @@ const Columns: React.FC<ColumnsProps> = React.forwardRef<
   return (
     <div
       {...rest}
-      className={cx(
-        css`
-          display: flex;
-          > * {
-            width: 100%;
-          }
-        `,
-        className
-      )}
+      className={cx(baselineStyle.baseline, styles.container, className)}
       ref={ref}
     >
       {children}

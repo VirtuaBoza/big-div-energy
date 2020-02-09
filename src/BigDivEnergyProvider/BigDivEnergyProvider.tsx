@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styles from './BigDivEnergyProvider.scss';
 
 const BigDivEnergyContext = React.createContext(null);
 export const useBigDivEnergy = () => React.useContext(BigDivEnergyContext);
@@ -9,7 +8,7 @@ const BigDivEnergyProvider: React.FC<BigDivEnergyProviderProps> = ({
 }) => {
   return (
     <BigDivEnergyContext.Provider value={null}>
-      <div className={styles.container}>{children}</div>
+      {children}
     </BigDivEnergyContext.Provider>
   );
 };
