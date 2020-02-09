@@ -19,7 +19,17 @@ module.exports = {
     config.resolve.extensions.push('.ts', '.tsx');
     config.module.rules.push({
       test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            modules: true,
+          },
+        },
+        'sass-loader',
+      ],
       include: path.resolve(__dirname, '../'),
     });
     return config;

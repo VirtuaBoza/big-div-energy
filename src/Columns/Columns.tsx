@@ -5,12 +5,13 @@ import styles from './Columns.scss';
 
 export interface ColumnsProps {
   className?: string;
+  padding?: string;
 }
 
 const Columns: React.FC<ColumnsProps> = React.forwardRef<
   HTMLDivElement,
   ColumnsProps
->(({ className, children, ...rest }, ref) => {
+>(({ padding = 'none', className, children, ...rest }, ref) => {
   return (
     <div
       {...rest}

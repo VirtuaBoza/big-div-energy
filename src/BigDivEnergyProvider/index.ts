@@ -1,1 +1,1 @@
-export { default, useBigDivEnergy } from './BigDivEnergyProvider';
+export { default } from './BigDivEnergyProvider';

@@ -8,6 +8,6 @@ export default {
 
 export const Default = () => (
   <BigDivEnergyProvider>
-    <h1>Provide me</h1>
+    Use <code>BigDivEnergyProvider</code> to provide options.
   </BigDivEnergyProvider>
 );

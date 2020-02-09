@@ -1,13 +1,22 @@
 import * as React from 'react';
+import BigDivEnergyContext, {
+  BigDivEnergyConfig,
+  defaultConfig,
+} from '../BigDivEnergyContext';
 
-const BigDivEnergyContext = React.createContext(null);
-export const useBigDivEnergy = () => React.useContext(BigDivEnergyContext);
-interface BigDivEnergyProviderProps {}
+interface BigDivEnergyProviderProps {
+  config?: BigDivEnergyConfig;
+}
 const BigDivEnergyProvider: React.FC<BigDivEnergyProviderProps> = ({
+  config = defaultConfig,
   children,
 }) => {
+  config = {
+    ...defaultConfig,
+    ...config,
+  };
   return (
-    <BigDivEnergyContext.Provider value={null}>
+    <BigDivEnergyContext.Provider value={config}>
       {children}
     </BigDivEnergyContext.Provider>
   );
