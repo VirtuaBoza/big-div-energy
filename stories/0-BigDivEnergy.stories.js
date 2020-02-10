@@ -1,5 +1,5 @@
-import * as React from 'react';
-import BigDivEnergyProvider from '../src/BigDivEnergyProvider';
+import { BigDivEnergyProvider } from 'big-div-energy';
+import React from 'react';
 
 export default {
   title: 'BigDivEnergy',

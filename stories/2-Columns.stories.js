@@ -1,5 +1,5 @@
-import * as React from 'react';
-import Columns from '../src/Columns';
+import { Columns } from 'big-div-energy';
+import React from 'react';
 
 export default {
   title: 'Columns',

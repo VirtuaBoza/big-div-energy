@@ -1,5 +1,5 @@
-import * as React from 'react';
-import Box from '../src/Box';
+import { Box } from 'big-div-energy';
+import React from 'react';
 
 export default {
   title: 'Box',

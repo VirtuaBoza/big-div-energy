@@ -1,9 +1,23 @@
 import * as React from 'react';
 
-export interface BigDivEnergyConfig {
-  padding?: string;
+interface PaddingConfig {
+  small?: number;
+  medium?: number;
+  large?: number;
 }
 
-export const defaultConfig = {};
+export interface BigDivEnergyConfig {
+  padding?: PaddingConfig;
+  breakpoints?: number[];
+}
+
+export const defaultConfig: BigDivEnergyConfig = {
+  padding: {
+    small: 1,
+    medium: 2,
+    large: 3,
+  },
+  breakpoints: [640, 768, 1024, 1280],
+};
 
 export default React.createContext<BigDivEnergyConfig>(defaultConfig);
