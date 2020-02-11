@@ -24,8 +24,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "emotion": "^10.0.27",
-    "facepaint": "^1.2.1"
+    "emotion": "^10.0.27"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
@@ -63,7 +62,7 @@
     "rollup-plugin-typescript2": "^0.25.3",
     "sass-loader": "^8.0.2",
     "ts-loader": "^6.2.1",
-    "typescript": "^2.8.3"
+    "typescript": "^3.7.5"
   },
   "files": [
     "dist"

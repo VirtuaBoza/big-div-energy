@@ -1,9 +1,9 @@
-import { Columns } from 'big-div-energy';
+import { Inline } from 'big-div-energy';
 import React from 'react';
 
 export default {
-  title: 'Columns',
-  component: Columns,
+  title: 'Inline',
+  component: Inline,
 };
 
 const Content = () => (
@@ -12,18 +12,18 @@ const Content = () => (
     <div style={{ backgroundColor: '#FF4242' }}>items</div>
     <div style={{ backgroundColor: '#FB62F6' }}>are</div>
     <div style={{ backgroundColor: '#645DD7' }}>in</div>
-    <div style={{ backgroundColor: '#B3FFFC' }}>columns.</div>
+    <div style={{ backgroundColor: '#B3FFFC' }}>line.</div>
   </React.Fragment>
 );
 
 export const Default = () => (
-  <Columns>
+  <Inline>
     <Content />
-  </Columns>
+  </Inline>
 );
 
 export const WithPadding = () => (
-  <Columns padding="small">
+  <Inline padding="small">
     <Content />
-  </Columns>
+  </Inline>
 );

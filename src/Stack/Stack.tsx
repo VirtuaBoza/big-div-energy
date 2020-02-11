@@ -1,25 +1,38 @@
-import { cx } from 'emotion';
-import * as React from 'react';
+import { css, cx } from 'emotion';
+import React from 'react';
 import baselineStyle from '../baseline.scss';
+import useBigDivEnergy from '../useBigDivEnergy';
 import styles from './Stack.scss';
 
 export interface StackProps {
   className?: string;
+  padding?: string | string[];
 }
 
 const Stack: React.FC<StackProps> = React.forwardRef<
   HTMLDivElement,
   StackProps
->(({ className, children, ...rest }, ref) => {
+>(({ className, children, padding, ...rest }, ref) => {
+  const { getSteppedSpacing, defaultPadding } = useBigDivEnergy();
+  padding = padding || defaultPadding;
   return (
     <div
       {...rest}
-      className={cx(baselineStyle.baseline, styles.container, className)}
+      className={cx(
+        baselineStyle.baseline,
+        styles.container,
+        css`
+          ${getSteppedSpacing(
+            'margin-top',
+            padding,
+            input => `> *:not(:first-child) {${input}}`
+          )}
+        `,
+        className
+      )}
       ref={ref}
     >
-      {React.Children.toArray(children).map((child, index) => (
-        <div key={index}>{child}</div>
-      ))}
+      {children}
     </div>
   );
 });

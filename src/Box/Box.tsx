@@ -1,5 +1,5 @@
 import { css, cx } from 'emotion';
-import * as React from 'react';
+import React from 'react';
 import baselineStyle from '../baseline.scss';
 import useBigDivEnergy from '../useBigDivEnergy';
 import styles from './Box.scss';
@@ -7,20 +7,20 @@ import styles from './Box.scss';
 export interface BoxProps {
   type?: string;
   className?: string;
-  padding?: string;
+  padding?: string | string[];
 }
 
 const Box: React.FC<BoxProps> = React.forwardRef<HTMLElement, BoxProps>(
-  ({ type = 'div', className, padding = 'none', ...rest }, ref) => {
-    const { getPaddingValue } = useBigDivEnergy();
-    const paddingValue = getPaddingValue(padding);
+  ({ type = 'div', className, padding, ...rest }, ref) => {
+    const { getSteppedSpacing, defaultPadding } = useBigDivEnergy();
+    padding = padding || defaultPadding;
     return React.createElement(type, {
       ...rest,
       className: cx(
         baselineStyle.baseline,
         styles.container,
         css`
-          padding: ${paddingValue}rem;
+          ${getSteppedSpacing('padding', padding)}
         `,
         className
       ),

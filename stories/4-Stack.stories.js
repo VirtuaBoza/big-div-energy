@@ -1,9 +1,9 @@
-import { Columns } from 'big-div-energy';
+import { Stack } from 'big-div-energy';
 import React from 'react';
 
 export default {
-  title: 'Columns',
-  component: Columns,
+  title: 'Stack',
+  component: Stack,
 };
 
 const Content = () => (
@@ -12,18 +12,18 @@ const Content = () => (
     <div style={{ backgroundColor: '#FF4242' }}>items</div>
     <div style={{ backgroundColor: '#FB62F6' }}>are</div>
     <div style={{ backgroundColor: '#645DD7' }}>in</div>
-    <div style={{ backgroundColor: '#B3FFFC' }}>columns.</div>
+    <div style={{ backgroundColor: '#B3FFFC' }}>a stack.</div>
   </React.Fragment>
 );
 
 export const Default = () => (
-  <Columns>
+  <Stack>
     <Content />
-  </Columns>
+  </Stack>
 );
 
 export const WithPadding = () => (
-  <Columns padding="small">
+  <Stack padding="small">
     <Content />
-  </Columns>
+  </Stack>
 );

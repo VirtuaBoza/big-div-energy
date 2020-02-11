@@ -1,25 +1,46 @@
-import { cx } from 'emotion';
-import * as React from 'react';
+import { css, cx } from 'emotion';
+import React from 'react';
 import baselineStyle from '../baseline.scss';
+import useBigDivEnergy from '../useBigDivEnergy';
 import styles from './Inline.scss';
 
 export interface InlineProps {
   className?: string;
+  padding?: string | string[];
 }
 
 const Inline: React.FC<InlineProps> = React.forwardRef<
   HTMLDivElement,
   InlineProps
->(({ className, children, ...rest }, ref) => {
+>(({ className, children, padding, ...rest }, ref) => {
+  const { getSteppedSpacing, defaultPadding } = useBigDivEnergy();
+  padding = padding || defaultPadding;
   return (
     <div
       {...rest}
-      className={cx(baselineStyle.baseline, styles.container, className)}
+      className={cx(
+        baselineStyle.baseline,
+        styles.container,
+        css`
+          ${getSteppedSpacing(
+            ['margin-left', 'margin-top'],
+            padding,
+            undefined,
+            input => `calc(0px - ${input})`
+          )}
+        `,
+        css`
+          ${getSteppedSpacing(
+            ['margin-left', 'margin-top'],
+            padding,
+            input => `> * {${input}}`
+          )}
+        `,
+        className
+      )}
       ref={ref}
     >
-      {React.Children.toArray(children).map((child, index) => (
-        <div key={index}>{child}</div>
-      ))}
+      {children}
     </div>
   );
 });
