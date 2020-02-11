@@ -6,15 +6,15 @@ import styles from './Columns.scss';
 
 export interface ColumnsProps {
   className?: string;
-  padding?: string | string[];
+  spacing?: string | string[];
 }
 
 const Columns: React.FC<ColumnsProps> = React.forwardRef<
   HTMLDivElement,
   ColumnsProps
->(({ padding, className, children, ...rest }, ref) => {
-  const { getSteppedSpacing, defaultPadding } = useBigDivEnergy();
-  padding = padding || defaultPadding;
+>(({ spacing, className, children, ...rest }, ref) => {
+  const { getSteppedSpacing, defaultSpacing } = useBigDivEnergy();
+  spacing = spacing || defaultSpacing;
   return (
     <div
       {...rest}
@@ -24,7 +24,7 @@ const Columns: React.FC<ColumnsProps> = React.forwardRef<
         css`
           ${getSteppedSpacing(
             'margin-right',
-            padding,
+            spacing,
             input => `> *:not(:last-child) {${input}}`,
             input => `calc(${input} / 2)`
           )}
@@ -32,7 +32,7 @@ const Columns: React.FC<ColumnsProps> = React.forwardRef<
         css`
           ${getSteppedSpacing(
             'margin-left',
-            padding,
+            spacing,
             input => `> *:not(:first-child) {${input}}`,
             input => `calc(${input} / 2)`
           )}

@@ -11,8 +11,8 @@ const content =
 
 export const Default = () => <Box>{content}</Box>;
 
-export const WithPadding = () => <Box padding="large">{content}</Box>;
+export const WithSpacing = () => <Box spacing="large">{content}</Box>;
 
-export const WithSteppedPadding = () => (
-  <Box padding={['none', 'small', 'large']}>{content}</Box>
+export const WithSteppedSpacing = () => (
+  <Box spacing={['none', 'small', 'large']}>{content}</Box>
 );

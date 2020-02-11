@@ -6,15 +6,15 @@ import styles from './Inline.scss';
 
 export interface InlineProps {
   className?: string;
-  padding?: string | string[];
+  spacing?: string | string[];
 }
 
 const Inline: React.FC<InlineProps> = React.forwardRef<
   HTMLDivElement,
   InlineProps
->(({ className, children, padding, ...rest }, ref) => {
-  const { getSteppedSpacing, defaultPadding } = useBigDivEnergy();
-  padding = padding || defaultPadding;
+>(({ className, children, spacing, ...rest }, ref) => {
+  const { getSteppedSpacing, defaultSpacing } = useBigDivEnergy();
+  spacing = spacing || defaultSpacing;
   return (
     <div
       {...rest}
@@ -24,7 +24,7 @@ const Inline: React.FC<InlineProps> = React.forwardRef<
         css`
           ${getSteppedSpacing(
             ['margin-left', 'margin-top'],
-            padding,
+            spacing,
             undefined,
             input => `calc(0px - ${input})`
           )}
@@ -32,7 +32,7 @@ const Inline: React.FC<InlineProps> = React.forwardRef<
         css`
           ${getSteppedSpacing(
             ['margin-left', 'margin-top'],
-            padding,
+            spacing,
             input => `> * {${input}}`
           )}
         `,

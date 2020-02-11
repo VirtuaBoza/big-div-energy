@@ -7,20 +7,20 @@ import styles from './Box.scss';
 export interface BoxProps {
   type?: string;
   className?: string;
-  padding?: string | string[];
+  spacing?: string | string[];
 }
 
 const Box: React.FC<BoxProps> = React.forwardRef<HTMLElement, BoxProps>(
-  ({ type = 'div', className, padding, ...rest }, ref) => {
-    const { getSteppedSpacing, defaultPadding } = useBigDivEnergy();
-    padding = padding || defaultPadding;
+  ({ type = 'div', className, spacing, ...rest }, ref) => {
+    const { getSteppedSpacing, defaultSpacing } = useBigDivEnergy();
+    spacing = spacing || defaultSpacing;
     return React.createElement(type, {
       ...rest,
       className: cx(
         baselineStyle.baseline,
         styles.container,
         css`
-          ${getSteppedSpacing('padding', padding)}
+          ${getSteppedSpacing('padding', spacing)}
         `,
         className
       ),

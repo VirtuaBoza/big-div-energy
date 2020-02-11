@@ -19,8 +19,8 @@ export const Default = () => (
   </Columns>
 );
 
-export const WithPadding = () => (
-  <Columns padding="small">
+export const WithSpacing = () => (
+  <Columns spacing="small">
     <Content />
   </Columns>
 );

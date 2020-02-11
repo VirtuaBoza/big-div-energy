@@ -1,8 +1,8 @@
 import React from 'react';
-import BigDivEnergyContext, { PaddingConfig } from './BigDivEnergyContext';
+import BigDivEnergyContext, { SpacingConfig } from './BigDivEnergyContext';
 
 export interface BigDivEnergy {
-  defaultPadding: string;
+  defaultSpacing: string | string[];
   getSteppedSpacing: (
     properties: string | string[],
     spacing: string | string[],
@@ -13,14 +13,14 @@ export interface BigDivEnergy {
 
 const useBigDivEnergy = (): BigDivEnergy => {
   const {
-    defaultPadding,
-    padding,
-    paddingUnit,
+    defaultSpacing,
+    spacing: spacingConfig,
+    spacingUnit,
     breakpoints,
   } = React.useContext(BigDivEnergyContext);
 
   return {
-    defaultPadding: defaultPadding!,
+    defaultSpacing: defaultSpacing!,
     getSteppedSpacing: (properties, spacing, ruleWrapper, valueWrapper) => {
       properties = Array.isArray(properties) ? properties : [properties];
       spacing = Array.isArray(spacing) ? spacing : [spacing];
@@ -28,8 +28,8 @@ const useBigDivEnergy = (): BigDivEnergy => {
       valueWrapper = valueWrapper || (input => input);
 
       return memoizedGetSteppedSpacing(
-        padding,
-        paddingUnit,
+        spacingConfig,
+        spacingUnit,
         breakpoints,
         properties,
         spacing,
@@ -45,8 +45,8 @@ export default useBigDivEnergy;
 const memoizedGetSteppedSpacing = memoize<string>(internalGetSteppedSpacing);
 
 function internalGetSteppedSpacing(
-  paddingConfig: PaddingConfig,
-  paddingUnit: string,
+  spacingConfig: SpacingConfig,
+  spacingUnit: string,
   breakpoints: number[],
   properties: string[],
   spacing: string[],
@@ -58,7 +58,7 @@ function internalGetSteppedSpacing(
       acc +
       ruleWrapper!(
         `${cur}: ${valueWrapper!(
-          `${paddingConfig[spacing[0]]}${paddingUnit}`
+          `${spacingConfig[spacing[0]]}${spacingUnit}`
         )};`
       )
     );
@@ -69,7 +69,7 @@ function internalGetSteppedSpacing(
         acc +
         ruleWrapper!(
           `${cur}: ${valueWrapper!(
-            `${paddingConfig[spacing[i + 1]]}${paddingUnit}`
+            `${spacingConfig[spacing[i + 1]]}${spacingUnit}`
           )};`
         )
       );

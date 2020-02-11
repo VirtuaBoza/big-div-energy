@@ -6,15 +6,15 @@ import styles from './Stack.scss';
 
 export interface StackProps {
   className?: string;
-  padding?: string | string[];
+  spacing?: string | string[];
 }
 
 const Stack: React.FC<StackProps> = React.forwardRef<
   HTMLDivElement,
   StackProps
->(({ className, children, padding, ...rest }, ref) => {
-  const { getSteppedSpacing, defaultPadding } = useBigDivEnergy();
-  padding = padding || defaultPadding;
+>(({ className, children, spacing, ...rest }, ref) => {
+  const { getSteppedSpacing, defaultSpacing } = useBigDivEnergy();
+  spacing = spacing || defaultSpacing;
   return (
     <div
       {...rest}
@@ -24,7 +24,7 @@ const Stack: React.FC<StackProps> = React.forwardRef<
         css`
           ${getSteppedSpacing(
             'margin-top',
-            padding,
+            spacing,
             input => `> *:not(:first-child) {${input}}`
           )}
         `,

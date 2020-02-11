@@ -1,25 +1,25 @@
 import * as React from 'react';
 
-export interface PaddingConfig {
+export interface SpacingConfig {
   [key: string]: number;
 }
 
 export interface BigDivEnergyConfig {
-  padding?: PaddingConfig;
-  paddingUnit?: string;
-  defaultPadding?: string;
+  spacing?: SpacingConfig;
+  spacingUnit?: string;
+  defaultSpacing?: string | string[];
   breakpoints?: number[];
 }
 
 export const defaultConfig: BigDivEnergyConfig = {
-  padding: {
+  spacing: {
     none: 0,
     small: 1,
     medium: 2,
     large: 3,
   },
-  paddingUnit: 'rem',
-  defaultPadding: 'none',
+  spacingUnit: 'rem',
+  defaultSpacing: 'none',
   breakpoints: [640, 768, 1024, 1280],
 };
 

@@ -22,8 +22,8 @@ export const Default = () => (
   </Stack>
 );
 
-export const WithPadding = () => (
-  <Stack padding="small">
+export const WithSpacing = () => (
+  <Stack spacing="small">
     <Content />
   </Stack>
 );

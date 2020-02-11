@@ -22,8 +22,8 @@ export const Default = () => (
   </Inline>
 );
 
-export const WithPadding = () => (
-  <Inline padding="small">
+export const WithSpacing = () => (
+  <Inline spacing="small">
     <Content />
   </Inline>
 );
