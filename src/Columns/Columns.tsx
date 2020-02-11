@@ -22,7 +22,20 @@ const Columns: React.FC<ColumnsProps> = React.forwardRef<
         baselineStyle.baseline,
         styles.container,
         css`
-          ${getSteppedSpacing('padding', padding, input => `> * {${input}}`)}
+          ${getSteppedSpacing(
+            'margin-right',
+            padding,
+            input => `> *:not(:last-child) {${input}}`,
+            input => `calc(${input} / 2)`
+          )}
+        `,
+        css`
+          ${getSteppedSpacing(
+            'margin-left',
+            padding,
+            input => `> *:not(:first-child) {${input}}`,
+            input => `calc(${input} / 2)`
+          )}
         `,
         className
       )}

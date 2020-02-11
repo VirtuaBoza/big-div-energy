@@ -1,5 +1,5 @@
 import React from 'react';
-import BigDivEnergyContext, { BigDivEnergyConfig } from './BigDivEnergyContext';
+import BigDivEnergyContext, { PaddingConfig } from './BigDivEnergyContext';
 
 export interface BigDivEnergy {
   defaultPadding: string;
@@ -12,10 +12,15 @@ export interface BigDivEnergy {
 }
 
 const useBigDivEnergy = (): BigDivEnergy => {
-  const config = React.useContext(BigDivEnergyContext);
+  const {
+    defaultPadding,
+    padding,
+    paddingUnit,
+    breakpoints,
+  } = React.useContext(BigDivEnergyContext);
 
   return {
-    defaultPadding: config.defaultPadding!,
+    defaultPadding: defaultPadding!,
     getSteppedSpacing: (properties, spacing, ruleWrapper, valueWrapper) => {
       properties = Array.isArray(properties) ? properties : [properties];
       spacing = Array.isArray(spacing) ? spacing : [spacing];
@@ -23,7 +28,9 @@ const useBigDivEnergy = (): BigDivEnergy => {
       valueWrapper = valueWrapper || (input => input);
 
       return memoizedGetSteppedSpacing(
-        config,
+        padding,
+        paddingUnit,
+        breakpoints,
         properties,
         spacing,
         ruleWrapper,
@@ -38,7 +45,9 @@ export default useBigDivEnergy;
 const memoizedGetSteppedSpacing = memoize<string>(internalGetSteppedSpacing);
 
 function internalGetSteppedSpacing(
-  config: BigDivEnergyConfig,
+  paddingConfig: PaddingConfig,
+  paddingUnit: string,
+  breakpoints: number[],
   properties: string[],
   spacing: string[],
   ruleWrapper: (input: string) => string,
@@ -49,28 +58,24 @@ function internalGetSteppedSpacing(
       acc +
       ruleWrapper!(
         `${cur}: ${valueWrapper!(
-          `${config.padding![spacing[0]]}${config.paddingUnit}`
+          `${paddingConfig[spacing[0]]}${paddingUnit}`
         )};`
       )
     );
   }, '');
-  for (
-    let i = 0;
-    i + 1 < spacing.length && i < config.breakpoints!.length;
-    i++
-  ) {
+  for (let i = 0; i + 1 < spacing.length && i < breakpoints.length; i++) {
     const filler = properties.reduce((acc, cur) => {
       return (
         acc +
         ruleWrapper!(
           `${cur}: ${valueWrapper!(
-            `${config.padding![spacing[i + 1]]}${config.paddingUnit}`
+            `${paddingConfig[spacing[i + 1]]}${paddingUnit}`
           )};`
         )
       );
     }, '');
     css += `
-        @media (min-width: ${config.breakpoints![i]}px) {
+        @media (min-width: ${breakpoints[i]}px) {
           ${filler}
         }
         `;

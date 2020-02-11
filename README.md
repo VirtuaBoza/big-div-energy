@@ -1,4 +1,4 @@
-# big-div-energy
+# ⚡ big-div-energy
 
 >
 
@@ -15,21 +15,6 @@ yarn add big-div-energy
 ```
 
 ## Usage
-
-```js
-// index.js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BigDivEnergyProvider } from 'big-div-energy';
-import App from './App';
-
-ReactDOM.render(
-  <BigDivEnergyProvider>
-    <App />
-  </BigDivEnergyProvider>,
-  document.getElementById('root')
-);
-```
 
 ```js
 // App.js
@@ -57,6 +42,25 @@ export default class App extends Component {
     );
   }
 }
+```
+
+### Optional
+
+If you want to configure spacing, you can pass a config object to `BigDivEnergyProvider`.
+
+```js
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BigDivEnergyProvider } from 'big-div-energy';
+import App from './App';
+
+ReactDOM.render(
+  <BigDivEnergyProvider>
+    <App />
+  </BigDivEnergyProvider>,
+  document.getElementById('root')
+);
 ```
 
 ## License
