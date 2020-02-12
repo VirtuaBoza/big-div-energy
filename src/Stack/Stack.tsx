@@ -7,8 +7,8 @@ import styles from './Stack.scss';
 
 const Stack = React.forwardRef<HTMLDivElement, any>(
   ({ className, children, spacing, ...rest }, ref) => {
-    const { getSteppedSpacing, defaultSpacing } = useBigDivEnergy();
-    spacing = spacing || defaultSpacing;
+    const { getSteppedSpacingCss, config } = useBigDivEnergy();
+    spacing = spacing || config.defaultSpacing;
     return (
       <div
         {...rest}
@@ -16,7 +16,7 @@ const Stack = React.forwardRef<HTMLDivElement, any>(
           baselineStyle.baseline,
           styles.container,
           css`
-            ${getSteppedSpacing(
+            ${getSteppedSpacingCss(
               'margin-top',
               spacing,
               input => `> *:not(:first-child) {${input}}`

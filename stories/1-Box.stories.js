@@ -22,3 +22,19 @@ export const WithSteppedSpacing = () => (
 );
 
 export const WithAlignment = () => <Box alignment="center">{content}</Box>;
+
+const MyOtherBox = ({ children }) => (
+  <div>I'm some other box, and here are my children: {children}</div>
+);
+
+export const WithCustomType = () => <Box type={MyOtherBox}>{content}</Box>;
+
+export const WithAnonymousType = () => (
+  <Box
+    type={({ children }) => (
+      <div>I'm anonymous, and here are my children: {children}</div>
+    )}
+  >
+    {content}
+  </Box>
+);

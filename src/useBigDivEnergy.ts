@@ -1,9 +1,12 @@
 import React from 'react';
-import BigDivEnergyContext, { SpacingConfig } from './BigDivEnergyContext';
+import BigDivEnergyContext, {
+  BigDivEnergyConfig,
+  SpacingConfig,
+} from './BigDivEnergyContext';
 
 export interface BigDivEnergy {
-  defaultSpacing: string | string[];
-  getSteppedSpacing: (
+  config: BigDivEnergyConfig;
+  getSteppedSpacingCss: (
     properties: string | string[],
     spacing: string | (string | string[])[],
     ruleWrapper?: (input: string) => string,
@@ -13,12 +16,8 @@ export interface BigDivEnergy {
 }
 
 const useBigDivEnergy = (): BigDivEnergy => {
-  const {
-    defaultSpacing,
-    spacing: spacingConfig,
-    spacingUnit,
-    breakpoints,
-  } = React.useContext(BigDivEnergyContext);
+  const config = React.useContext(BigDivEnergyContext);
+  const { spacing: spacingConfig, spacingUnit, breakpoints } = config;
 
   const { width } = useWindowSize();
   let breakpointIndex = 0;
@@ -31,9 +30,9 @@ const useBigDivEnergy = (): BigDivEnergy => {
   }
 
   return {
+    config,
     breakpointIndex,
-    defaultSpacing: defaultSpacing!,
-    getSteppedSpacing: (properties, spacing, ruleWrapper, valueWrapper) => {
+    getSteppedSpacingCss: (properties, spacing, ruleWrapper, valueWrapper) => {
       properties = Array.isArray(properties) ? properties : [properties];
       spacing = Array.isArray(spacing)
         ? spacing.map(s => (Array.isArray(s) ? s : [s]))

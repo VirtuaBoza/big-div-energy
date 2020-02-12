@@ -7,15 +7,15 @@ import styles from './Box.scss';
 
 const Box = React.forwardRef<HTMLElement, any>(
   ({ type, className, spacing, alignment, ...rest }, ref) => {
-    const { getSteppedSpacing, defaultSpacing } = useBigDivEnergy();
-    spacing = spacing || defaultSpacing;
+    const { getSteppedSpacingCss, config } = useBigDivEnergy();
+    spacing = spacing || config.defaultSpacing;
     return React.createElement(type!, {
       ...rest,
       className: cx(
         baselineStyle.baseline,
         styles.container,
         css`
-          ${getSteppedSpacing('padding', spacing)}
+          ${getSteppedSpacingCss('padding', spacing)}
         `,
         css`
           text-align: ${alignment};
@@ -28,8 +28,8 @@ const Box = React.forwardRef<HTMLElement, any>(
 );
 
 Box.propTypes = {
-  /** The HTML element type you want to use. */
-  type: PropTypes.string,
+  /** The element type you want to use. */
+  type: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
   spacing: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(

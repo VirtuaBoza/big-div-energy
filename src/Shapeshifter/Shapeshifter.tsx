@@ -9,7 +9,6 @@ import useBigDivEnergy from '../useBigDivEnergy';
 const Shapeshifter = React.forwardRef<HTMLElement, any>(
   ({ components, ...rest }, ref) => {
     const { breakpointIndex } = useBigDivEnergy();
-    console.log(breakpointIndex);
     const component =
       components[breakpointIndex] || components[components.length - 1];
 
@@ -33,7 +32,11 @@ const Shapeshifter = React.forwardRef<HTMLElement, any>(
 
 Shapeshifter.propTypes = {
   components: PropTypes.arrayOf(
-    PropTypes.oneOf(['Box', 'Columns', 'Inline', 'Stack'])
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.elementType,
+      PropTypes.oneOf(['Box', 'Columns', 'Inline', 'Stack']),
+    ])
   ).isRequired,
 };
 

@@ -5,9 +5,16 @@ import BigDivEnergyContext, {
   defaultConfig,
 } from '../BigDivEnergyContext';
 
-interface BigDivEnergyProviderProps {
+export interface BigDivEnergyProviderProps {
   config?: BigDivEnergyConfig;
 }
+
+/**
+ * Use BigDivEnergyProvider to provide a config for big-div-energy components.
+ *
+ * The config and other useful properties and functions can be retrieved with useBigDivEnergy.
+ *
+ */
 const BigDivEnergyProvider: React.FC<BigDivEnergyProviderProps> = ({
   config = defaultConfig,
   children,

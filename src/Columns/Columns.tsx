@@ -7,8 +7,8 @@ import styles from './Columns.scss';
 
 const Columns = React.forwardRef<HTMLDivElement, any>(
   ({ spacing, className, children, ...rest }, ref) => {
-    const { getSteppedSpacing, defaultSpacing } = useBigDivEnergy();
-    spacing = spacing || defaultSpacing;
+    const { getSteppedSpacingCss, config } = useBigDivEnergy();
+    spacing = spacing || config.defaultSpacing;
     return (
       <div
         {...rest}
@@ -16,7 +16,7 @@ const Columns = React.forwardRef<HTMLDivElement, any>(
           baselineStyle.baseline,
           styles.container,
           css`
-            ${getSteppedSpacing(
+            ${getSteppedSpacingCss(
               'margin-right',
               spacing,
               input => `> *:not(:last-child) {${input}}`,
@@ -24,7 +24,7 @@ const Columns = React.forwardRef<HTMLDivElement, any>(
             )}
           `,
           css`
-            ${getSteppedSpacing(
+            ${getSteppedSpacingCss(
               'margin-left',
               spacing,
               input => `> *:not(:first-child) {${input}}`,

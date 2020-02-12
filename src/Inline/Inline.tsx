@@ -7,8 +7,8 @@ import styles from './Inline.scss';
 
 const Inline = React.forwardRef<HTMLDivElement, any>(
   ({ className, children, spacing, alignment, ...rest }, ref) => {
-    const { getSteppedSpacing, defaultSpacing } = useBigDivEnergy();
-    spacing = spacing || defaultSpacing;
+    const { getSteppedSpacingCss, config } = useBigDivEnergy();
+    spacing = spacing || config.defaultSpacing;
 
     const justifyContent =
       alignment === 'center'
@@ -24,7 +24,7 @@ const Inline = React.forwardRef<HTMLDivElement, any>(
           baselineStyle.baseline,
           styles.container,
           css`
-            ${getSteppedSpacing(
+            ${getSteppedSpacingCss(
               ['margin-left', 'margin-top'],
               spacing,
               undefined,
@@ -32,7 +32,7 @@ const Inline = React.forwardRef<HTMLDivElement, any>(
             )}
           `,
           css`
-            ${getSteppedSpacing(
+            ${getSteppedSpacingCss(
               ['margin-left', 'margin-top'],
               spacing,
               input => `> * {${input}}`
