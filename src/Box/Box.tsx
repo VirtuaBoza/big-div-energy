@@ -6,7 +6,7 @@ import useBigDivEnergy from '../useBigDivEnergy';
 import styles from './Box.scss';
 
 const Box = React.forwardRef<HTMLElement, any>(
-  ({ type, className, spacing, ...rest }, ref) => {
+  ({ type, className, spacing, alignment, ...rest }, ref) => {
     const { getSteppedSpacing, defaultSpacing } = useBigDivEnergy();
     spacing = spacing || defaultSpacing;
     return React.createElement(type!, {
@@ -17,6 +17,9 @@ const Box = React.forwardRef<HTMLElement, any>(
         css`
           ${getSteppedSpacing('padding', spacing)}
         `,
+        css`
+          text-align: ${alignment};
+        `,
         className
       ),
       ref,
@@ -26,7 +29,7 @@ const Box = React.forwardRef<HTMLElement, any>(
 
 Box.propTypes = {
   /** The HTML element type you want to use. */
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   spacing: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(
@@ -36,10 +39,12 @@ Box.propTypes = {
       ])
     ),
   ]),
+  alignment: PropTypes.oneOf(['left', 'center', 'right']),
 };
 
 Box.defaultProps = {
   type: 'div',
+  alignment: 'left',
 };
 
 export default Box;

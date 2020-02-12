@@ -27,3 +27,9 @@ export const WithSpacing = () => (
     <Content />
   </Inline>
 );
+
+export const WithAlignment = () => (
+  <Inline alignment="right" spacing="small">
+    <Content />
+  </Inline>
+);

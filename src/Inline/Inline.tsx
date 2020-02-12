@@ -6,9 +6,17 @@ import useBigDivEnergy from '../useBigDivEnergy';
 import styles from './Inline.scss';
 
 const Inline = React.forwardRef<HTMLDivElement, any>(
-  ({ className, children, spacing, ...rest }, ref) => {
+  ({ className, children, spacing, alignment, ...rest }, ref) => {
     const { getSteppedSpacing, defaultSpacing } = useBigDivEnergy();
     spacing = spacing || defaultSpacing;
+
+    const justifyContent =
+      alignment === 'center'
+        ? 'center'
+        : alignment === 'right'
+        ? 'flex-end'
+        : 'flex-start';
+
     return (
       <div
         {...rest}
@@ -30,6 +38,9 @@ const Inline = React.forwardRef<HTMLDivElement, any>(
               input => `> * {${input}}`
             )}
           `,
+          css`
+            justify-content: ${justifyContent};
+          `,
           className
         )}
         ref={ref}
@@ -50,6 +61,11 @@ Inline.propTypes = {
       ])
     ),
   ]),
+  alignment: PropTypes.oneOf(['left', 'center', 'right']),
+};
+
+Inline.defaultProps = {
+  alignment: 'left',
 };
 
 export default Inline;

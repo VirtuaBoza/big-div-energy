@@ -20,3 +20,5 @@ export const WithUnevenSpacing = () => (
 export const WithSteppedSpacing = () => (
   <Box spacing={['none', 'small', 'large']}>{content}</Box>
 );
+
+export const WithAlignment = () => <Box alignment="center">{content}</Box>;
