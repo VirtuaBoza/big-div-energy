@@ -5,7 +5,7 @@ export interface BigDivEnergy {
   defaultSpacing: string | string[];
   getSteppedSpacing: (
     properties: string | string[],
-    spacing: string | string[],
+    spacing: string | (string | string[])[],
     ruleWrapper?: (input: string) => string,
     valueWrapper?: (input: string) => string
   ) => string;
@@ -23,7 +23,9 @@ const useBigDivEnergy = (): BigDivEnergy => {
     defaultSpacing: defaultSpacing!,
     getSteppedSpacing: (properties, spacing, ruleWrapper, valueWrapper) => {
       properties = Array.isArray(properties) ? properties : [properties];
-      spacing = Array.isArray(spacing) ? spacing : [spacing];
+      spacing = Array.isArray(spacing)
+        ? spacing.map(s => (Array.isArray(s) ? s : [s]))
+        : [[spacing]];
       ruleWrapper = ruleWrapper || (input => input);
       valueWrapper = valueWrapper || (input => input);
 
@@ -49,7 +51,7 @@ function internalGetSteppedSpacing(
   spacingUnit: string,
   breakpoints: number[],
   properties: string[],
-  spacing: string[],
+  spacing: string[][],
   ruleWrapper: (input: string) => string,
   valueWrapper: (input: string) => string
 ): string {
@@ -58,7 +60,10 @@ function internalGetSteppedSpacing(
       acc +
       ruleWrapper!(
         `${cur}: ${valueWrapper!(
-          `${spacingConfig[spacing[0]]}${spacingUnit}`
+          spacing[0].reduce(
+            (acc, cur) => `${acc} ${spacingConfig[cur]}${spacingUnit}`,
+            ''
+          )
         )};`
       )
     );
@@ -69,7 +74,10 @@ function internalGetSteppedSpacing(
         acc +
         ruleWrapper!(
           `${cur}: ${valueWrapper!(
-            `${spacingConfig[spacing[i + 1]]}${spacingUnit}`
+            spacing[i + 1].reduce(
+              (acc, cur) => `${acc} ${spacingConfig[cur]}${spacingUnit}`,
+              ''
+            )
           )};`
         )
       );
