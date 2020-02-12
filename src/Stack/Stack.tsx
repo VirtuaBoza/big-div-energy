@@ -33,7 +33,6 @@ const Stack = React.forwardRef<HTMLDivElement, any>(
 );
 
 Stack.propTypes = {
-  className: PropTypes.string,
   spacing: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(

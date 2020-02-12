@@ -42,7 +42,6 @@ const Columns = React.forwardRef<HTMLDivElement, any>(
 );
 
 Columns.propTypes = {
-  className: PropTypes.string,
   spacing: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(

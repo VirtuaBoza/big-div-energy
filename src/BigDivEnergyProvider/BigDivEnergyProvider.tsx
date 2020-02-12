@@ -1,4 +1,5 @@
-import * as React from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import BigDivEnergyContext, {
   BigDivEnergyConfig,
   defaultConfig,
@@ -20,6 +21,20 @@ const BigDivEnergyProvider: React.FC<BigDivEnergyProviderProps> = ({
       {children}
     </BigDivEnergyContext.Provider>
   );
+};
+
+BigDivEnergyProvider.propTypes = {
+  /** An optional config object to customize BigDivEnergy. */
+  config: PropTypes.shape({
+    spacing: PropTypes.objectOf(PropTypes.number),
+    spacingUnit: PropTypes.string,
+    defaultSpacing: PropTypes.string,
+    breakpoints: PropTypes.arrayOf(PropTypes.number),
+  }),
+};
+
+BigDivEnergyProvider.defaultProps = {
+  config: defaultConfig,
 };
 
 export default BigDivEnergyProvider;

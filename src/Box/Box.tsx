@@ -25,8 +25,8 @@ const Box = React.forwardRef<HTMLElement, any>(
 );
 
 Box.propTypes = {
+  /** The HTML element type you want to use. */
   type: PropTypes.string.isRequired,
-  className: PropTypes.string,
   spacing: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(

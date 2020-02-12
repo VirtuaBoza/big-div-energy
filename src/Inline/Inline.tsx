@@ -41,7 +41,6 @@ const Inline = React.forwardRef<HTMLDivElement, any>(
 );
 
 Inline.propTypes = {
-  className: PropTypes.string,
   spacing: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(
