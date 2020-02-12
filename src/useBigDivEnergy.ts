@@ -9,6 +9,7 @@ export interface BigDivEnergy {
     ruleWrapper?: (input: string) => string,
     valueWrapper?: (input: string) => string
   ) => string;
+  breakpointIndex: number;
 }
 
 const useBigDivEnergy = (): BigDivEnergy => {
@@ -19,7 +20,18 @@ const useBigDivEnergy = (): BigDivEnergy => {
     breakpoints,
   } = React.useContext(BigDivEnergyContext);
 
+  const { width } = useWindowSize();
+  let breakpointIndex = 0;
+  for (let i = 0; i < breakpoints!.length; i++) {
+    if (width < breakpoints![i]) {
+      break;
+    } else {
+      breakpointIndex = i;
+    }
+  }
+
   return {
+    breakpointIndex,
     defaultSpacing: defaultSpacing!,
     getSteppedSpacing: (properties, spacing, ruleWrapper, valueWrapper) => {
       properties = Array.isArray(properties) ? properties : [properties];
@@ -105,4 +117,26 @@ function memoize<T>(func: (...rest: any[]) => T): (...rest: any[]) => T {
   };
   memoized.cache = new Map();
   return memoized;
+}
+
+function useWindowSize() {
+  function getSize() {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  }
+
+  const [windowSize, setWindowSize] = React.useState(getSize);
+
+  React.useEffect(() => {
+    function handleResize() {
+      setWindowSize(getSize());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []); // Empty array ensures that effect is only run on mount and unmount
+
+  return windowSize;
 }
