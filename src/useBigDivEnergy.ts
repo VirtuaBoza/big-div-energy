@@ -8,7 +8,11 @@ export interface BigDivEnergy {
   config: BigDivEnergyConfig;
   getSteppedSpacingCss: (
     properties: string | string[],
-    spacing: string | (string | string[])[],
+    spacing:
+      | string
+      | null
+      | undefined
+      | (string | null | undefined | (string | null | undefined)[])[],
     ruleWrapper?: (input: string) => string,
     valueWrapper?: (input: string) => string
   ) => string;
@@ -17,15 +21,14 @@ export interface BigDivEnergy {
 
 const useBigDivEnergy = (): BigDivEnergy => {
   const config = React.useContext(BigDivEnergyContext);
-  const { spacing: spacingConfig, spacingUnit, breakpoints } = config;
+  const { spacing: spacingConfig, breakpoints, defaultSpacing } = config;
 
   const { width } = useWindowSize();
   let stepIndex = 0;
   for (let i = 0; i < breakpoints!.length; i++) {
+    stepIndex = i;
     if (width < breakpoints![i]) {
       break;
-    } else {
-      stepIndex = i;
     }
   }
 
@@ -42,12 +45,12 @@ const useBigDivEnergy = (): BigDivEnergy => {
 
       return memoizedGetSteppedSpacing(
         spacingConfig,
-        spacingUnit,
         breakpoints,
         properties,
         spacing,
         ruleWrapper,
-        valueWrapper
+        valueWrapper,
+        defaultSpacing
       );
     },
   };
@@ -59,46 +62,45 @@ const memoizedGetSteppedSpacing = memoize<string>(internalGetSteppedSpacing);
 
 function internalGetSteppedSpacing(
   spacingConfig: SpacingConfig,
-  spacingUnit: string,
   breakpoints: number[],
   properties: string[],
-  spacing: string[][],
+  spacing: (string | null | undefined | (string | null | undefined)[])[],
   ruleWrapper: (input: string) => string,
-  valueWrapper: (input: string) => string
+  valueWrapper: (input: string) => string,
+  defaultSpacing: string
 ): string {
-  let css = properties.reduce((acc, cur) => {
-    return (
-      acc +
-      ruleWrapper!(
-        `${cur}: ${valueWrapper!(
-          spacing[0].reduce(
-            (acc, cur) => `${acc} ${spacingConfig[cur]}${spacingUnit}`,
-            ''
-          )
-        )};`
-      )
-    );
-  }, '');
-  for (let i = 0; i + 1 < spacing.length && i < breakpoints.length; i++) {
-    const filler = properties.reduce((acc, cur) => {
-      return (
-        acc +
-        ruleWrapper!(
-          `${cur}: ${valueWrapper!(
-            spacing[i + 1].reduce(
-              (acc, cur) => `${acc} ${spacingConfig[cur]}${spacingUnit}`,
-              ''
-            )
-          )};`
-        )
-      );
-    }, '');
-    css += `
-        @media (min-width: ${breakpoints[i]}px) {
-          ${filler}
+  let css = '';
+
+  function getRules(stepIndex: number): string {
+    return properties.reduce((accProp, curProp) => {
+      let value = '';
+      for (let i = 0; i < spacing[stepIndex]!.length; i++) {
+        if (spacing[stepIndex]![i]) {
+          value += ` ${spacingConfig[spacing[stepIndex]![i]!] ||
+            spacing[stepIndex]![i]}`;
+        } else {
+          value += ` ${spacingConfig[defaultSpacing]}`;
         }
-        `;
+      }
+      return accProp + ruleWrapper!(`${curProp}: ${valueWrapper!(value)};`);
+    }, '');
   }
+
+  if (spacing[0]) {
+    css = getRules(0);
+  }
+
+  for (let i = 0; i + 1 < spacing.length && i < breakpoints.length; i++) {
+    if (spacing[i + 1]) {
+      const filler = getRules(i + 1);
+      css += `
+          @media (min-width: ${breakpoints[i]}px) {
+            ${filler}
+          }
+          `;
+    }
+  }
+
   return css;
 }
 

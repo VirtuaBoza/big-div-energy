@@ -1,24 +1,22 @@
 import * as React from 'react';
 
 export interface SpacingConfig {
-  [key: string]: number;
+  [key: string]: string;
 }
 
 export interface BigDivEnergyConfig {
   spacing?: SpacingConfig;
-  spacingUnit?: string;
   defaultSpacing?: string | string[];
   breakpoints?: number[];
 }
 
 export const defaultConfig: BigDivEnergyConfig = {
   spacing: {
-    none: 0,
-    small: 1,
-    medium: 2,
-    large: 3,
+    none: '0rem',
+    small: '1rem',
+    medium: '2rem',
+    large: '3rem',
   },
-  spacingUnit: 'rem',
   defaultSpacing: 'none',
   breakpoints: [640, 768, 1024, 1280],
 };

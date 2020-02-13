@@ -15,9 +15,14 @@ export const Default = () => (
 export const WithConfig = () => (
   <BigDivEnergyProvider
     config={{
-      spacing: { nada: 0, short: 8, tall: 12, grande: 16, venti: 20 },
+      spacing: {
+        nada: '0px',
+        short: '8px',
+        tall: '12px',
+        grande: '16px',
+        venti: '20px',
+      },
       defaultSpacing: 'nada',
-      spacingUnit: 'px',
       breakpoints: [768],
     }}
   >

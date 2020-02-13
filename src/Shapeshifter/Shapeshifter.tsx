@@ -9,8 +9,19 @@ import useBigDivEnergy from '../useBigDivEnergy';
 const Shapeshifter = React.forwardRef<HTMLElement, any>(
   ({ components, ...rest }, ref) => {
     const { stepIndex } = useBigDivEnergy();
-    const component =
-      components[stepIndex] || components[components.length - 1];
+
+    let component;
+
+    for (let i = stepIndex; i >= 0; i--) {
+      if (components[i]) {
+        component = components[i];
+        break;
+      }
+    }
+
+    if (!component) {
+      return null;
+    }
 
     switch (component) {
       case 'Box':

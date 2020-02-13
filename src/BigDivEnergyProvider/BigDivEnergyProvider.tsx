@@ -35,8 +35,7 @@ BigDivEnergyProvider.propTypes = {
    * An optional config object to customize big-div-energy components and `useBigDivEnergy` outputs.
    */
   config: PropTypes.shape({
-    spacing: PropTypes.objectOf(PropTypes.number),
-    spacingUnit: PropTypes.string,
+    spacing: PropTypes.objectOf(PropTypes.string),
     defaultSpacing: PropTypes.string,
     breakpoints: PropTypes.arrayOf(PropTypes.number),
   }),

@@ -39,6 +39,12 @@ export const WithSteppedSpacing = () => (
   </Box>
 );
 
+export const WithSkippedSteppedSpacing = () => (
+  <Box spacing={[, 'small', 'large']} style={style}>
+    <Content />
+  </Box>
+);
+
 export const WithAlignment = () => (
   <Box alignment="center" style={style}>
     <Content />
