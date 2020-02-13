@@ -8,9 +8,9 @@ import useBigDivEnergy from '../useBigDivEnergy';
 
 const Shapeshifter = React.forwardRef<HTMLElement, any>(
   ({ components, ...rest }, ref) => {
-    const { breakpointIndex } = useBigDivEnergy();
+    const { stepIndex } = useBigDivEnergy();
     const component =
-      components[breakpointIndex] || components[components.length - 1];
+      components[stepIndex] || components[components.length - 1];
 
     switch (component) {
       case 'Box':

@@ -10,9 +10,9 @@ export interface BigDivEnergyProviderProps {
 }
 
 /**
- * Use BigDivEnergyProvider to provide a config for big-div-energy components.
+ * Use `BigDivEnergyProvider` to provide a config for big-div-energy components.
  *
- * The config and other useful properties and functions can be retrieved with useBigDivEnergy.
+ * The config and other useful properties and functions can be retrieved with `useBigDivEnergy`.
  *
  */
 const BigDivEnergyProvider: React.FC<BigDivEnergyProviderProps> = ({
@@ -31,7 +31,9 @@ const BigDivEnergyProvider: React.FC<BigDivEnergyProviderProps> = ({
 };
 
 BigDivEnergyProvider.propTypes = {
-  /** An optional config object to customize BigDivEnergy. */
+  /**
+   * An optional config object to customize big-div-energy components and `useBigDivEnergy` outputs.
+   */
   config: PropTypes.shape({
     spacing: PropTypes.objectOf(PropTypes.number),
     spacingUnit: PropTypes.string,

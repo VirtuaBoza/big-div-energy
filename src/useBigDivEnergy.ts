@@ -12,7 +12,7 @@ export interface BigDivEnergy {
     ruleWrapper?: (input: string) => string,
     valueWrapper?: (input: string) => string
   ) => string;
-  breakpointIndex: number;
+  stepIndex: number;
 }
 
 const useBigDivEnergy = (): BigDivEnergy => {
@@ -20,18 +20,18 @@ const useBigDivEnergy = (): BigDivEnergy => {
   const { spacing: spacingConfig, spacingUnit, breakpoints } = config;
 
   const { width } = useWindowSize();
-  let breakpointIndex = 0;
+  let stepIndex = 0;
   for (let i = 0; i < breakpoints!.length; i++) {
     if (width < breakpoints![i]) {
       break;
     } else {
-      breakpointIndex = i;
+      stepIndex = i;
     }
   }
 
   return {
     config,
-    breakpointIndex,
+    stepIndex,
     getSteppedSpacingCss: (properties, spacing, ruleWrapper, valueWrapper) => {
       properties = Array.isArray(properties) ? properties : [properties];
       spacing = Array.isArray(spacing)
