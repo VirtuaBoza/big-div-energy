@@ -5,7 +5,7 @@ import baselineStyle from '../baseline.scss';
 import useBigDivEnergy from '../useBigDivEnergy';
 import styles from './Stack.scss';
 
-const Stack = React.forwardRef<HTMLDivElement, any>(
+const Stack = React.forwardRef<HTMLElement, any>(
   ({ className, children, spacing, ...rest }, ref) => {
     const { getSteppedSpacingCss, config } = useBigDivEnergy();
     spacing = spacing || config.defaultSpacing;

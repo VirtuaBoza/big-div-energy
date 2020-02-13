@@ -1,11 +1,15 @@
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import baselineStyle from '../baseline.scss';
-import useBigDivEnergy from '../useBigDivEnergy';
+import useBigDivEnergy, { Spacing } from '../useBigDivEnergy';
 import styles from './Columns.scss';
 
-const Columns = React.forwardRef<HTMLDivElement, any>(
+export interface ColumnsProps extends HTMLAttributes<any> {
+  spacing?: Spacing;
+}
+
+const Columns = React.forwardRef<HTMLElement, ColumnsProps>(
   ({ spacing, className, children, ...rest }, ref) => {
     const { getSteppedSpacingCss, config } = useBigDivEnergy();
     spacing = spacing || config.defaultSpacing;
@@ -33,7 +37,7 @@ const Columns = React.forwardRef<HTMLDivElement, any>(
           `,
           className
         )}
-        ref={ref}
+        ref={ref as React.RefObject<HTMLDivElement>}
       >
         {children}
       </div>

@@ -1,11 +1,16 @@
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import baselineStyle from '../baseline.scss';
-import useBigDivEnergy from '../useBigDivEnergy';
+import useBigDivEnergy, { Spacing } from '../useBigDivEnergy';
 import styles from './Inline.scss';
 
-const Inline = React.forwardRef<HTMLDivElement, any>(
+export interface InlineProps extends HTMLAttributes<any> {
+  spacing?: Spacing;
+  alignment?: 'left' | 'center' | 'right';
+}
+
+const Inline = React.forwardRef<HTMLElement, InlineProps>(
   ({ className, children, spacing, alignment, ...rest }, ref) => {
     const { getSteppedSpacingCss, config } = useBigDivEnergy();
     spacing = spacing || config.defaultSpacing;
@@ -43,7 +48,7 @@ const Inline = React.forwardRef<HTMLDivElement, any>(
           `,
           className
         )}
-        ref={ref}
+        ref={ref as React.RefObject<HTMLDivElement>}
       >
         {children}
       </div>

@@ -1,12 +1,25 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import Box from '../Box';
 import Columns from '../Columns';
 import Inline from '../Inline';
 import Stack from '../Stack';
 import useBigDivEnergy from '../useBigDivEnergy';
 
-const Shapeshifter = React.forwardRef<HTMLElement, any>(
+export interface ShapeshifterProps extends HTMLAttributes<any> {
+  components: (
+    | string
+    | PropTypes.ReactComponentLike
+    | 'Box'
+    | 'Columns'
+    | 'Inline'
+    | 'Stack'
+    | null
+    | undefined
+  )[];
+}
+
+const Shapeshifter = React.forwardRef<HTMLElement, ShapeshifterProps>(
   ({ components, ...rest }, ref) => {
     const { stepIndex } = useBigDivEnergy();
 

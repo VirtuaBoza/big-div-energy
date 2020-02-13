@@ -4,15 +4,17 @@ import BigDivEnergyContext, {
   SpacingConfig,
 } from './BigDivEnergyContext';
 
+export type Spacing =
+  | string
+  | null
+  | undefined
+  | (string | null | undefined | (string | null | undefined)[])[];
+
 export interface BigDivEnergy {
   config: BigDivEnergyConfig;
   getSteppedSpacingCss: (
     properties: string | string[],
-    spacing:
-      | string
-      | null
-      | undefined
-      | (string | null | undefined | (string | null | undefined)[])[],
+    spacing: Spacing,
     ruleWrapper?: (input: string) => string,
     valueWrapper?: (input: string) => string
   ) => string;

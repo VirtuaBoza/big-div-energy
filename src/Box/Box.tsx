@@ -2,20 +2,16 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React, { HTMLAttributes } from 'react';
 import baselineStyle from '../baseline.scss';
-import useBigDivEnergy from '../useBigDivEnergy';
+import useBigDivEnergy, { Spacing } from '../useBigDivEnergy';
 import styles from './Box.scss';
 
 export interface BoxProps extends HTMLAttributes<any> {
   type?: PropTypes.ReactComponentLike;
-  spacing?:
-    | string
-    | null
-    | undefined
-    | (string | null | undefined | (string | null | undefined)[])[];
+  spacing?: Spacing;
   alignment?: string;
 }
 
-const Box: React.FC<BoxProps> = React.forwardRef<HTMLElement, BoxProps>(
+const Box = React.forwardRef<HTMLElement, BoxProps>(
   ({ type = 'div', className, spacing, alignment, ...rest }, ref) => {
     const { getSteppedSpacingCss, config } = useBigDivEnergy();
     spacing = spacing || config.defaultSpacing;
