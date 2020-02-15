@@ -1,6 +1,6 @@
 # ⚡ big-div-energy
 
->
+A responsive layout component library for React.
 
 ## Install
 
