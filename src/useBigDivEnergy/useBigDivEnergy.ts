@@ -2,7 +2,7 @@ import React from 'react';
 import BigDivEnergyContext, {
   BigDivEnergyConfig,
   SpacingConfig,
-} from './BigDivEnergyContext';
+} from '../BigDivEnergyContext';
 
 export type Spacing =
   | string
@@ -69,6 +69,7 @@ function internalGetSteppedSpacing(
   spacing: (string | null | undefined | (string | null | undefined)[])[],
   ruleWrapper: (input: string) => string,
   valueWrapper: (input: string) => string,
+  // TODO: expect an array here so there can be defaults for each step.
   defaultSpacing: string
 ): string {
   let css = '';
