@@ -1,36 +1,41 @@
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import baselineStyle from '../baseline.scss';
-import useBigDivEnergy from '../useBigDivEnergy';
+import useBigDivEnergy, { Spacing } from '../useBigDivEnergy';
 import styles from './Stack.scss';
 
-const Stack = React.forwardRef<HTMLElement, any>(
-  ({ className, children, spacing, ...rest }, ref) => {
+export interface StackProps extends HTMLAttributes<any> {
+  type?: PropTypes.ReactComponentLike;
+  spacing?: Spacing;
+}
+
+const Stack = React.forwardRef<HTMLElement, StackProps>(
+  ({ type = 'div', className, spacing, ...rest }, ref) => {
     const { getSteppedSpacingCss, config } = useBigDivEnergy();
     spacing = spacing || config.defaultSpacing;
-    return (
-      <div
-        {...rest}
-        className={cx(
-          baselineStyle.baseline,
-          styles.container,
-          css`
-            ${getSteppedSpacingCss(
-              'margin-top',
-              spacing,
-              input => `> *:not(:first-child) {${input}}`
-            )}
-          `,
-          className
-        )}
-        ref={ref}
-      >
-        {children}
-      </div>
-    );
+    return React.createElement(type, {
+      ...rest,
+      className: cx(
+        baselineStyle.baseline,
+        styles.container,
+        css`
+          ${getSteppedSpacingCss(
+            'margin-top',
+            spacing,
+            input => `> *:not(:first-child) {${input}}`
+          )}
+        `,
+        className
+      ),
+      ref,
+    });
   }
 );
+
+Stack.defaultProps = {
+  type: 'div',
+};
 
 Stack.propTypes = {
   spacing: PropTypes.oneOfType([

@@ -27,7 +27,7 @@ const useBigDivEnergy = (): BigDivEnergy => {
 
   const { width } = useWindowSize();
   let stepIndex = 0;
-  for (let i = 0; i < breakpoints!.length; i++) {
+  for (let i = 0; i <= breakpoints!.length; i++) {
     stepIndex = i;
     if (width < breakpoints![i]) {
       break;

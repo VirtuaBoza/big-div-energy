@@ -1,4 +1,4 @@
-import { Shapeshifter } from 'big-div-energy';
+import { Inline, Shapeshifter, Stack } from 'big-div-energy';
 import React from 'react';
 
 export default {
@@ -17,13 +17,13 @@ const Content = () => (
 );
 
 export const Default = () => (
-  <Shapeshifter components={['Stack', 'Inline']}>
+  <Shapeshifter components={[Stack, Inline]}>
     <Content />
   </Shapeshifter>
 );
 
 export const WithOtherProps = () => (
-  <Shapeshifter components={['Stack', 'Inline']} spacing={['none', 'medium']}>
+  <Shapeshifter components={[Stack, Inline]} spacing={['none', 'medium']}>
     <Content />
   </Shapeshifter>
 );

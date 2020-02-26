@@ -27,3 +27,10 @@ export const WithSpacing = () => (
     <Content />
   </Stack>
 );
+
+export const AsUnorderedList = () => (
+  <Stack type="ul">
+    <li>Some</li>
+    <li>Content</li>
+  </Stack>
+);
