@@ -16,52 +16,7 @@ yarn add big-div-energy
 
 ## Usage
 
-```js
-// App.js
-import { Box, Columns, Inline, Stack } from 'big-div-energy';
-import React, { Component } from 'react';
-
-export default class App extends Component {
-  render() {
-    return (
-      <Box>
-        <Stack>
-          <Box>Hi there</Box>
-          <Inline>
-            <Box>Hi there</Box>
-            <Box>Hi there</Box>
-            <Box>Hi there</Box>
-          </Inline>
-          <Columns>
-            <Box>Hi there</Box>
-            <Box>Hi there</Box>
-            <Box>Hi there</Box>
-          </Columns>
-        </Stack>
-      </Box>
-    );
-  }
-}
-```
-
-### Optional
-
-If you want to configure spacing, you can pass a config object to `BigDivEnergyProvider`.
-
-```js
-// index.js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BigDivEnergyProvider } from 'big-div-energy';
-import App from './App';
-
-ReactDOM.render(
-  <BigDivEnergyProvider>
-    <App />
-  </BigDivEnergyProvider>,
-  document.getElementById('root')
-);
-```
+See usage examples in [Storybook](https://VirtuaBoza.github.io/big-div-energy/).
 
 ## License
 
