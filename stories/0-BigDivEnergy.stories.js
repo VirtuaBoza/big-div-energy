@@ -10,7 +10,7 @@ export const Default = () => {
   const url = new URL(location.href);
   return (
   <BigDivEnergyProvider>
-    See <a href={`${url.pathname === '/iframe.html' ? '/' : ''}?path=/docs/bigdivenergy--default`}>Docs</a> for usage.
+    See <a href={`${url.pathname === '/iframe.html' ? '/' : '/big-div-energy/'}?path=/docs/bigdivenergy--default`}>Docs</a> for usage.
   </BigDivEnergyProvider>
 )};
 
@@ -31,7 +31,7 @@ export const WithConfig = () => {
       breakpoints: [768],
     }}
   >
-    See <a href={`${url.pathname === '/iframe.html' ? '/' : ''}?path=/docs/bigdivenergy--with-config`}>Docs</a> for code
+    See <a href={`${url.pathname === '/iframe.html' ? '/' : '/big-div-energy/'}?path=/docs/bigdivenergy--with-config`}>Docs</a> for code
     example.
   </BigDivEnergyProvider>
 )};
@@ -42,7 +42,7 @@ export const UseBigDivEnergy = () => {
 
   return (
     <BigDivEnergyProvider>
-      See <a href={`${url.pathname === '/iframe.html' ? '/' : ''}?path=/docs/bigdivenergy--use-big-div-energy`}>Docs</a> for
+      See <a href={`${url.pathname === '/iframe.html' ? '/' : '/big-div-energy/'}?path=/docs/bigdivenergy--use-big-div-energy`}>Docs</a> for
       code example.
       <dl>
         <dt>config</dt>
