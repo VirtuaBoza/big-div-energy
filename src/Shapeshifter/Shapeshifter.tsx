@@ -15,7 +15,6 @@ const Shapeshifter = React.forwardRef<HTMLElement, ShapeshifterProps>(
     for (let i = 0; i <= stepIndex; i++) {
       component = components[i] || component;
     }
-    console.log(stepIndex);
 
     if (!component) {
       return null;
