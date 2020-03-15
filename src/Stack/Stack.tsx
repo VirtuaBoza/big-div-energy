@@ -1,24 +1,34 @@
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { HTMLAttributes } from 'react';
 import baselineStyle from '../baseline.scss';
-import useBigDivEnergy, { Spacing } from '../useBigDivEnergy';
+import {
+  AlignItems,
+  alignItemsPropType,
+  Component,
+  Spacing,
+  spacingPropType,
+} from '../propTypes';
+import useBigDivEnergy from '../useBigDivEnergy';
 import styles from './Stack.scss';
 
 export interface StackProps extends HTMLAttributes<any> {
-  type?: PropTypes.ReactComponentLike;
+  type?: Component;
   spacing?: Spacing;
+  alignItems?: AlignItems;
 }
 
 const Stack = React.forwardRef<HTMLElement, StackProps>(
-  ({ type = 'div', className, spacing, ...rest }, ref) => {
+  ({ type, alignItems, className, spacing, ...rest }, ref) => {
     const { getSteppedSpacingCss, config } = useBigDivEnergy();
     spacing = spacing || config.defaultSpacing;
-    return React.createElement(type, {
+    return React.createElement(type!, {
       ...rest,
       className: cx(
         baselineStyle.baseline,
         styles.container,
+        css`
+          align-items: ${alignItems};
+        `,
         css`
           ${getSteppedSpacingCss(
             'margin-top',
@@ -35,18 +45,12 @@ const Stack = React.forwardRef<HTMLElement, StackProps>(
 
 Stack.defaultProps = {
   type: 'div',
-};
+  alignItems: 'stretch',
+} as StackProps;
 
 Stack.propTypes = {
-  spacing: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.arrayOf(PropTypes.string),
-      ])
-    ),
-  ]),
+  spacing: spacingPropType,
+  alignItems: alignItemsPropType,
 };
 
 export default Stack;

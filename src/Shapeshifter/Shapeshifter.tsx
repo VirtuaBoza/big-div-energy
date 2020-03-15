@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { HTMLAttributes } from 'react';
+import { Component, typePropType } from '../propTypes';
 import useBigDivEnergy from '../useBigDivEnergy';
 
 export interface ShapeshifterProps extends HTMLAttributes<any> {
-  components: (string | PropTypes.ReactComponentLike | null | undefined)[];
+  components: (Component | null | undefined)[];
 }
 
 const Shapeshifter = React.forwardRef<HTMLElement, ShapeshifterProps>(
@@ -28,9 +29,7 @@ const Shapeshifter = React.forwardRef<HTMLElement, ShapeshifterProps>(
 );
 
 Shapeshifter.propTypes = {
-  components: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
-  ).isRequired,
+  components: PropTypes.arrayOf(typePropType).isRequired,
 };
 
 export default Shapeshifter;

@@ -1,17 +1,22 @@
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { HTMLAttributes } from 'react';
 import baselineStyle from '../baseline.scss';
-import useBigDivEnergy, { Spacing } from '../useBigDivEnergy';
+import {
+  Alignment,
+  alignmentPropType,
+  Spacing,
+  spacingPropType,
+} from '../propTypes';
+import useBigDivEnergy from '../useBigDivEnergy';
 import styles from './Inline.scss';
 
 export interface InlineProps extends HTMLAttributes<any> {
   spacing?: Spacing;
-  alignment?: 'left' | 'center' | 'right';
+  alignment?: Alignment;
 }
 
 const Inline = React.forwardRef<HTMLElement, InlineProps>(
-  ({ className, children, spacing, alignment, ...rest }, ref) => {
+  ({ alignment, spacing, className, children, ...rest }, ref) => {
     const { getSteppedSpacingCss, config } = useBigDivEnergy();
     spacing = spacing || config.defaultSpacing;
 
@@ -56,21 +61,13 @@ const Inline = React.forwardRef<HTMLElement, InlineProps>(
   }
 );
 
-Inline.propTypes = {
-  spacing: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.arrayOf(PropTypes.string),
-      ])
-    ),
-  ]),
-  alignment: PropTypes.oneOf(['left', 'center', 'right']),
-};
-
 Inline.defaultProps = {
   alignment: 'left',
+} as InlineProps;
+
+Inline.propTypes = {
+  spacing: spacingPropType,
+  alignment: alignmentPropType,
 };
 
 export default Inline;

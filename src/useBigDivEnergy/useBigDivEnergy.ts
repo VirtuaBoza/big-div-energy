@@ -3,12 +3,7 @@ import BigDivEnergyContext, {
   BigDivEnergyConfig,
   SpacingConfig,
 } from '../BigDivEnergyContext';
-
-export type Spacing =
-  | string
-  | null
-  | undefined
-  | (string | null | undefined | (string | null | undefined)[])[];
+import { Spacing } from '../propTypes';
 
 export interface BigDivEnergy {
   config: BigDivEnergyConfig;

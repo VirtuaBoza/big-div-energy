@@ -1,1 +1,1 @@
-export { default, Spacing } from './useBigDivEnergy';
+export { default } from './useBigDivEnergy';

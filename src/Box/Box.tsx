@@ -1,21 +1,28 @@
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { HTMLAttributes } from 'react';
 import baselineStyle from '../baseline.scss';
-import useBigDivEnergy, { Spacing } from '../useBigDivEnergy';
+import {
+  Alignment,
+  alignmentPropType,
+  Component,
+  Spacing,
+  spacingPropType,
+  typePropType,
+} from '../propTypes';
+import useBigDivEnergy from '../useBigDivEnergy';
 import styles from './Box.scss';
 
 export interface BoxProps extends HTMLAttributes<any> {
-  type?: PropTypes.ReactComponentLike;
+  type?: Component;
   spacing?: Spacing;
-  alignment?: string;
+  alignment?: Alignment;
 }
 
 const Box = React.forwardRef<HTMLElement, BoxProps>(
-  ({ type = 'div', className, spacing, alignment, ...rest }, ref) => {
+  ({ type, alignment, spacing, className, ...rest }, ref) => {
     const { getSteppedSpacingCss, config } = useBigDivEnergy();
     spacing = spacing || config.defaultSpacing;
-    return React.createElement(type, {
+    return React.createElement(type!, {
       ...rest,
       className: cx(
         baselineStyle.baseline,
@@ -36,21 +43,13 @@ const Box = React.forwardRef<HTMLElement, BoxProps>(
 Box.defaultProps = {
   type: 'div',
   alignment: 'left',
-};
+} as BoxProps;
 
 Box.propTypes = {
   /** The element type you want to use. */
-  type: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
-  spacing: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.arrayOf(PropTypes.string),
-      ])
-    ),
-  ]),
-  alignment: PropTypes.oneOf(['left', 'center', 'right']),
+  type: typePropType,
+  spacing: spacingPropType,
+  alignment: alignmentPropType,
 };
 
 export default Box;

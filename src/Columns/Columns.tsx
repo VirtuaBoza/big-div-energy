@@ -1,16 +1,22 @@
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { HTMLAttributes } from 'react';
 import baselineStyle from '../baseline.scss';
-import useBigDivEnergy, { Spacing } from '../useBigDivEnergy';
+import {
+  AlignItems,
+  alignItemsPropType,
+  Spacing,
+  spacingPropType,
+} from '../propTypes';
+import useBigDivEnergy from '../useBigDivEnergy';
 import styles from './Columns.scss';
 
 export interface ColumnsProps extends HTMLAttributes<any> {
   spacing?: Spacing;
+  alignItems?: AlignItems;
 }
 
 const Columns = React.forwardRef<HTMLElement, ColumnsProps>(
-  ({ spacing, className, children, ...rest }, ref) => {
+  ({ alignItems, spacing, className, children, ...rest }, ref) => {
     const { getSteppedSpacingCss, config } = useBigDivEnergy();
     spacing = spacing || config.defaultSpacing;
     return (
@@ -19,6 +25,9 @@ const Columns = React.forwardRef<HTMLElement, ColumnsProps>(
         className={cx(
           baselineStyle.baseline,
           styles.container,
+          css`
+            align-items: ${alignItems};
+          `,
           css`
             ${getSteppedSpacingCss(
               'margin-right',
@@ -45,16 +54,13 @@ const Columns = React.forwardRef<HTMLElement, ColumnsProps>(
   }
 );
 
+Columns.defaultProps = {
+  alignItems: 'stretch',
+} as ColumnsProps;
+
 Columns.propTypes = {
-  spacing: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.arrayOf(PropTypes.string),
-      ])
-    ),
-  ]),
+  spacing: spacingPropType,
+  alignItems: alignItemsPropType,
 };
 
 export default Columns;
