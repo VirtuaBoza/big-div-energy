@@ -1,3 +1,11 @@
+export type Alignment =
+  | HorizontalAlignment
+  | VerticalAlignment
+  | "bottomLeading"
+  | "bottomTrailing"
+  | "topLeading"
+  | "topTrailing";
+
 export type HorizontalAlignment = "center" | "leading" | "trailing";
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/length
@@ -24,4 +32,5 @@ export type LengthUnit =
   | "in"
   | "pc"
   | "pt";
+
 export type VerticalAlignment = "bottom" | "center" | "top";

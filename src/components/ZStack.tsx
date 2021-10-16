@@ -1,7 +1,16 @@
+import { Alignment } from "../types";
+import { Property } from "csstype";
 import { css } from "@emotion/react";
 import React, { Fragment, useLayoutEffect, useRef } from "react";
 
-export const ZStack: React.FC = ({ children }) => {
+export interface ZStackProps {
+  alignment?: Alignment;
+}
+
+export const ZStack: React.FC<ZStackProps> = ({
+  alignment = "center",
+  children,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const refs = useRef<HTMLDivElement[]>([]);
 
@@ -36,16 +45,68 @@ export const ZStack: React.FC = ({ children }) => {
     return children;
   })();
 
+  const { alignItems, justifyContent } = ((): {
+    alignItems: Property.AlignContent;
+    justifyContent: Property.JustifyContent;
+  } => {
+    switch (alignment) {
+      case "bottom":
+        return {
+          alignItems: "flex-end",
+          justifyContent: "center",
+        };
+      case "bottomLeading":
+        return {
+          alignItems: "flex-end",
+          justifyContent: "flex-start",
+        };
+      case "bottomTrailing":
+        return {
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
+        };
+      case "leading":
+        return {
+          alignItems: "center",
+          justifyContent: "flex-start",
+        };
+      case "top":
+        return {
+          alignItems: "flex-start",
+          justifyContent: "center",
+        };
+      case "topLeading":
+        return {
+          alignItems: "flex-start",
+          justifyContent: "flex-start",
+        };
+      case "topTrailing":
+        return {
+          alignItems: "flex-start",
+          justifyContent: "flex-end",
+        };
+      case "trailing":
+        return {
+          alignItems: "center",
+          justifyContent: "flex-end",
+        };
+      default:
+        return {
+          alignItems: "center",
+          justifyContent: "center",
+        };
+    }
+  })();
+
   refs.current = [];
 
   return (
     <div
       ref={ref}
       css={css`
-        background-color: green;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: ${alignItems};
+        justify-content: ${justifyContent};
       `}
     >
       {React.Children.map(derivedChildren, (child, i) => {
