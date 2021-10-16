@@ -1,7 +1,7 @@
-export interface HStackProps {
-  className: string;
-}
+import React from "react";
 
-export function HStack(props: HStackProps) {
+export const HStack: React.FC = React.memo((props) => {
   return <div {...props} />;
-}
+});
+
+HStack.displayName = "HStack";
