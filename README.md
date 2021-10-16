@@ -2,18 +2,18 @@
 
 # ⚡ big-div-energy
 
-A responsive layout component library for React.
+A responsive layout component library for React heavily inspired by SwiftUI.
 
 ## Install
 
 ```bash
-npm install big-div-energy
+npm install big-div-energy @emotion/react
 ```
 
 Or
 
 ```bash
-yarn add big-div-energy
+yarn add big-div-energy @emotion/react
 ```
 
 ## Usage
