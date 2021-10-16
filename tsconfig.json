@@ -7,6 +7,7 @@
     // Ensure that Babel can safely transpile files in the TypeScript project
     "isolatedModules": true,
     "jsx": "preserve",
+    "jsxImportSource": "@emotion/react",
     "lib": ["ESNext"],
     "outDir": "dist",
     "noImplicitAny": true,
