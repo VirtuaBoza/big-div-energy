@@ -1,5 +1,5 @@
+import { Container } from "./types";
 import {
-  Container,
   ISpacerContext,
   defaultSpacerContext,
   useSpacerContext,

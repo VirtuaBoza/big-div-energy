@@ -34,3 +34,15 @@ export type LengthUnit =
   | "pt";
 
 export type VerticalAlignment = "bottom" | "center" | "top";
+
+export type Container = "HStack" | "VStack";
+
+type GenericModifier<T extends string, TProps> = {
+  props: TProps;
+  type: T;
+};
+
+export type PaddingModifierProps = undefined;
+export type PaddingModifier = GenericModifier<"padding", PaddingModifierProps>;
+
+export type Modifier = PaddingModifier;

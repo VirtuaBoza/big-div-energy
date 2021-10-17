@@ -1,15 +1,19 @@
 import { Alignment } from "../types";
+import { ClassNames } from "@emotion/react";
+import { Modifier } from "../types";
 import { Property } from "csstype";
-import { css } from "@emotion/react";
+import { ViewModifier } from "./ViewModifier";
 import React, { Fragment, useLayoutEffect, useRef } from "react";
 
-export interface ZStackProps {
+export type ZStackProps = {
   alignment?: Alignment;
-}
+  modifiers?: Modifier[];
+};
 
 export const ZStack: React.FC<ZStackProps> = ({
   alignment = "center",
   children,
+  modifiers,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const refs = useRef<HTMLDivElement[]>([]);
@@ -101,32 +105,37 @@ export const ZStack: React.FC<ZStackProps> = ({
   refs.current = [];
 
   return (
-    <div
-      ref={ref}
-      css={css`
-        display: flex;
-        align-items: ${alignItems};
-        justify-content: ${justifyContent};
-      `}
-    >
-      {React.Children.map(derivedChildren, (child, i) => {
-        return (
-          <div
-            key={(React.isValidElement(child) && child.key) || i}
-            ref={(el) => {
-              if (el) {
-                refs.current[i] = el;
-              }
-            }}
-            css={css`
-              position: absolute;
-              z-index: ${i + 1};
-            `}
-          >
-            {child}
-          </div>
-        );
-      })}
-    </div>
+    <ClassNames>
+      {({ css }) => (
+        <ViewModifier
+          ref={ref}
+          className={css`
+            display: flex;
+            align-items: ${alignItems};
+            justify-content: ${justifyContent};
+          `}
+          modifiers={modifiers}
+        >
+          {React.Children.map(derivedChildren, (child, i) => {
+            return (
+              <div
+                key={(React.isValidElement(child) && child.key) || i}
+                ref={(el) => {
+                  if (el) {
+                    refs.current[i] = el;
+                  }
+                }}
+                css={css`
+                  position: absolute;
+                  z-index: ${i + 1};
+                `}
+              >
+                {child}
+              </div>
+            );
+          })}
+        </ViewModifier>
+      )}
+    </ClassNames>
   );
 };

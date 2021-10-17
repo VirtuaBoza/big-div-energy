@@ -1,6 +1,5 @@
+import { Container } from "./types";
 import React, { useContext } from "react";
-
-export type Container = "HStack" | "VStack";
 
 export interface ISpacerContext {
   container: Container;

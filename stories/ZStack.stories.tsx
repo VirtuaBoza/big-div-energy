@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 
 import { BigDivEnergy, ZStack } from "../src";
 
