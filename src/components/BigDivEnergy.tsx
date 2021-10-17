@@ -62,7 +62,7 @@ export const BigDivEnergy: React.FC<BigDivEnergyProps> = ({
             dl,
             dd {
               margin: 0;
-              overflow-wrap: anywhere;
+              overflow-wrap: break-word;
             }
 
             /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */

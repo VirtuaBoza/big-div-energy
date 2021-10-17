@@ -31,6 +31,7 @@ export const HStack: React.FC<HStackProps> = ({
 
   const spacerContextValue = useMemo<ISpacerContext>(
     () => ({
+      container: "HStack",
       setHasSpacer: setContainsSpacer,
     }),
     []

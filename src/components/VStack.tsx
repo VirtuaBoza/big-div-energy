@@ -32,6 +32,7 @@ export const VStack: React.FC<VStackProps> = ({
 
   const spacerContextValue = useMemo<ISpacerContext>(
     () => ({
+      container: "VStack",
       setHasSpacer: setContainsSpacer,
     }),
     []

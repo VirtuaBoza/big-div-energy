@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { BigDivEnergy, Spacer, VStack } from "../src";
+import { BigDivEnergy, VStack } from "../src";
 
 export default {
   component: VStack,

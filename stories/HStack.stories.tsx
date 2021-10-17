@@ -24,8 +24,7 @@ export const Default = Template.bind({});
 Default.args = {
   children: (
     <>
-      <ExampleText text="Hello, world!" />
-      {/* <Spacer /> */}
+      <ExampleText text="Hello" />
       <ExampleText text="Hello, world!!!!!!!!!!!!!!" />
     </>
   ),
