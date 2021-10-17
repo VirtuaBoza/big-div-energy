@@ -86,7 +86,6 @@ export const BigDivEnergy: React.FC<BigDivEnergyProps> = ({
               min-height: 100vh;
               // https://css-tricks.com/css-fix-for-100vh-in-mobile-webkit/
               min-height: -webkit-fill-available;
-              overflow: hidden;
               text-rendering: optimizeSpeed;
             }
 
