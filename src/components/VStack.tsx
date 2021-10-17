@@ -1,9 +1,10 @@
 import { HorizontalAlignment } from "../types";
-import { ISpacerContext, SpacerContext } from "../SpacerContext";
 import { Property } from "csstype";
+import { SpacerContext } from "../SpacerContext";
 import { css } from "@emotion/react";
 import { useBigDivEnergy } from "../BigDivEnergyContext";
-import React, { useMemo, useState } from "react";
+import { useSpacerContainer } from "../SpacerContainerContext";
+import React from "react";
 
 export interface VStackProps {
   alignment?: HorizontalAlignment;
@@ -17,7 +18,7 @@ export const VStack: React.FC<VStackProps> = ({
   ...rest
 }) => {
   const { config } = useBigDivEnergy();
-  const [containsSpacer, setContainsSpacer] = useState(false);
+  const { spacerContainers, spacerContext } = useSpacerContainer("VStack");
 
   const alignItems: Property.AlignContent = (() => {
     switch (alignment) {
@@ -30,16 +31,8 @@ export const VStack: React.FC<VStackProps> = ({
     }
   })();
 
-  const spacerContextValue = useMemo<ISpacerContext>(
-    () => ({
-      container: "VStack",
-      setHasSpacer: setContainsSpacer,
-    }),
-    []
-  );
-
   return (
-    <SpacerContext.Provider value={spacerContextValue}>
+    <SpacerContext.Provider value={spacerContext}>
       <div
         css={[
           css`
@@ -51,9 +44,13 @@ export const VStack: React.FC<VStackProps> = ({
               margin-bottom: ${spacing}${config.lengthUnit};
             }
           `,
-          containsSpacer &&
+          spacerContainers.includes("VStack") &&
             css`
               height: 100%;
+            `,
+          spacerContainers.includes("HStack") &&
+            css`
+              width: 100%;
             `,
         ]}
         {...rest}

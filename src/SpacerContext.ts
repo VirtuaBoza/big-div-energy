@@ -1,15 +1,23 @@
 import React, { useContext } from "react";
 
+export type Container = "HStack" | "VStack";
+
 export interface ISpacerContext {
-  container: "HStack" | "VStack";
-  setHasSpacer(hasSpacer: boolean): void;
+  container: Container;
+  spacerMounted(container: Container): void;
+  spacerUnmounted(container: Container): void;
 }
 
-export const SpacerContext = React.createContext<ISpacerContext>({
+export const defaultSpacerContext: ISpacerContext = {
   container: "HStack",
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setHasSpacer: () => {},
-});
+  spacerMounted: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  spacerUnmounted: () => {},
+};
+
+export const SpacerContext =
+  React.createContext<ISpacerContext>(defaultSpacerContext);
 
 export function useSpacerContext(): ISpacerContext {
   return useContext(SpacerContext);

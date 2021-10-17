@@ -9,14 +9,15 @@ export interface SpacerProps {
 
 export const Spacer: React.VFC<SpacerProps> = ({ minLength = 0 }) => {
   const { config } = useBigDivEnergy();
-  const { container, setHasSpacer } = useSpacerContext();
+  const { container, spacerMounted, spacerUnmounted } = useSpacerContext();
 
   useLayoutEffect(() => {
-    setHasSpacer(true);
+    spacerMounted(container);
     return () => {
-      setHasSpacer(false);
+      spacerUnmounted(container);
     };
-  }, [setHasSpacer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const minLengthValue = `${minLength}${config.lengthUnit}`;
   const minLengthCss =
