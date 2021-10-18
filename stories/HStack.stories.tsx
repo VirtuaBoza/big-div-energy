@@ -20,7 +20,7 @@ const ExampleText = ({ size = "26px", text = "Hello, world!" }) => (
   <p style={{ border: "1px solid black", fontSize: size }}>{text}</p>
 );
 
-export const Default = Template.bind({});
+export const Default = Template.bind({}) as typeof Template;
 Default.args = {
   children: (
     <>

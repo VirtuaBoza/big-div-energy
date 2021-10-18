@@ -6,6 +6,15 @@ export type Alignment =
   | "topLeading"
   | "topTrailing";
 
+export type Edge =
+  | "all"
+  | "bottom"
+  | "horizontal"
+  | "leading"
+  | "top"
+  | "trailing"
+  | "vertical";
+
 export type HorizontalAlignment = "center" | "leading" | "trailing";
 /**
  * https://developer.mozilla.org/en-US/docs/Web/CSS/length
@@ -37,12 +46,17 @@ export type VerticalAlignment = "bottom" | "center" | "top";
 
 export type Container = "HStack" | "VStack";
 
-type GenericModifier<T extends string, TProps> = {
+export type ModifierType = "padding";
+
+type GenericModifier<T extends ModifierType, TProps> = {
   props: TProps;
   type: T;
 };
 
-export type PaddingModifierProps = undefined;
+export type PaddingModifierProps =
+  | [undefined?]
+  | [length: number]
+  | [edges: Edge, length?: number];
 export type PaddingModifier = GenericModifier<"padding", PaddingModifierProps>;
 
 export type Modifier = PaddingModifier;

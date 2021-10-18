@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof VStack> = (args) => (
   </BigDivEnergy>
 );
 
-export const Default = Template.bind({});
+export const Default = Template.bind({}) as typeof Template;
 Default.args = {
   children: (
     <>

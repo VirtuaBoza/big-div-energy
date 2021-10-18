@@ -35,7 +35,7 @@ const ExampleText = ({
   </p>
 );
 
-export const Default = Template.bind({});
+export const Default = Template.bind({}) as typeof Template;
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
   children: (
