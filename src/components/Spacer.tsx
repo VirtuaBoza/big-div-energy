@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { useBigDivEnergy } from "..";
+import { useBigDivEnergy } from "../BigDivEnergyContext";
 import { useSpacerContext } from "../SpacerContext";
 import React, { useLayoutEffect } from "react";
 

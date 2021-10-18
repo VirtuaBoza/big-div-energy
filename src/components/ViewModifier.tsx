@@ -1,6 +1,6 @@
-import { Edge, useBigDivEnergy } from "..";
-import { Modifier, ModifierType } from "../types";
+import { Edge, Modifier, ModifierType } from "../types";
 import { SerializedStyles, css } from "@emotion/react";
+import { useBigDivEnergy } from "../BigDivEnergyContext";
 import React from "react";
 
 export interface ViewModifierProps {
